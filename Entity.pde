@@ -1,6 +1,7 @@
 public class Entity {
   private int x, y, size;
   private color c;
+  private boolean active = true;
   
   public Entity(int x, int y, color c, int size) {
     this.x = x;
@@ -28,6 +29,18 @@ public class Entity {
   
   public void setY(int y) {
     this.y = y;
+  }
+  
+  public boolean isActive() {
+    return active; 
+  }
+  
+  public void setActive(boolean active) {
+    this.active = active;
+  }
+  
+  public int getSize() {
+    return size;
   }
   
 }
