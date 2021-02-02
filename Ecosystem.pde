@@ -12,10 +12,16 @@ public void draw() {
   for (Blob blob : blobs) {
     if (!blob.isActive()) continue;
     
+    for (Food food : foods) {
+      blob.blobVsFood(food);
+    }
+    
     blob.move();
     blob.draw();
   }
   for (Food food : foods) {
+    if (!food.isActive()) continue;
+    
     food.draw();
   }
   

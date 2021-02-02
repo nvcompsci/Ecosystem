@@ -32,6 +32,7 @@ public class Blob extends Entity {
   
   public void blobVsFood(Food food) {
     if (dist(super.getX(),super.getY(),food.getX(),food.getY()) < (super.getSize() + food.getSize())/2.0) {
+      System.out.println("ate food");
       eat(food);
     }
   }
