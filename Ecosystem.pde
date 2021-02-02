@@ -1,4 +1,6 @@
 ArrayList<Blob> blobs = new ArrayList();
+ArrayList<Blue> blues = new ArrayList();
+ArrayList<Red> reds = new ArrayList();
 ArrayList<Food> foods = new ArrayList();
 String mode = "";
 
@@ -44,9 +46,16 @@ private void takeOutTheTrash() {
 
 //1. Spawn Reds and Blues, not Blobs
 public void mouseReleased() {
-  if (mode.equals("blob")) {
-    Blob newBlob = new Blob(mouseX, mouseY, #FF00FF, 30);
+  if (mode.equals("blue")) {
+    //polymorphism
+    Blob newBlob = new Blue(mouseX, mouseY);
     blobs.add(newBlob);
+    blues.add( (Blue) newBlob);
+  }
+  else if (mode.equals("red")) {
+    Blob newBlob = new Red(mouseX, mouseY);
+    blobs.add(newBlob);
+    reds.add( (Red) newBlob);
   }
   else if (mode.equals("food")) {
     Food newFood = new Food(mouseX, mouseY);
@@ -57,8 +66,9 @@ public void mouseReleased() {
 public void keyPressed() {
   if (keyCode == 70) {
     mode = "food";
-    System.out.println("food mode");
+  } else if (keyCode == 82) {
+    mode = "red";
   } else if (keyCode == 66) {
-    mode = "blob";
+    mode = "blue"; 
   }
 }
