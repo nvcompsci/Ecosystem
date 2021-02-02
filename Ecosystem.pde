@@ -42,6 +42,7 @@ private void takeOutTheTrash() {
   foods.remove(trashFood);
 }
 
+//1. Spawn Reds and Blues, not Blobs
 public void mouseReleased() {
   if (mode.equals("blob")) {
     Blob newBlob = new Blob(mouseX, mouseY, #FF00FF, 30);
