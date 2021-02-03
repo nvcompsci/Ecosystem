@@ -10,23 +10,44 @@ public void setup() {
 
 public void draw() {
   background(200);
-
+  
+  ArrayList<Blue> babies = new ArrayList();
+  
+  for (Blue blue : blues) {
+    if (blue.isActive()) {
+      for (Red red : reds) {
+        if (red.isActive()) { 
+          blue.fight(red);
+        }
+      }
+      Blue maybeBaby = (Blue) blue.reproduce();
+      if (maybeBaby != null) {
+        babies.add(maybeBaby);
+        blobs.add(maybeBaby);
+      }
+    }
+  }
+  
+  for (Blue babyBlue : babies) {
+    if (babyBlue != null) blues.add(babyBlue);
+  }
+  
   for (Blob blob : blobs) {
     if (!blob.isActive()) continue;
-    
+
     for (Food food : foods) {
       blob.blobVsFood(food);
     }
-    
+
     blob.move();
     blob.draw();
   }
   for (Food food : foods) {
     if (!food.isActive()) continue;
-    
+
     food.draw();
   }
-  
+
   takeOutTheTrash();
 }
 
@@ -36,7 +57,7 @@ private void takeOutTheTrash() {
     if (!blob.isActive()) trash.add(blob);
   }
   blobs.remove(trash);
-  
+
   ArrayList<Food> trashFood = new ArrayList();
   for (Food food : foods) {
     if (!food.isActive()) trashFood.add(food);
@@ -51,13 +72,11 @@ public void mouseReleased() {
     Blob newBlob = new Blue(mouseX, mouseY);
     blobs.add(newBlob);
     blues.add( (Blue) newBlob);
-  }
-  else if (mode.equals("red")) {
+  } else if (mode.equals("red")) {
     Blob newBlob = new Red(mouseX, mouseY);
     blobs.add(newBlob);
     reds.add( (Red) newBlob);
-  }
-  else if (mode.equals("food")) {
+  } else if (mode.equals("food")) {
     Food newFood = new Food(mouseX, mouseY);
     foods.add(newFood);
   }
@@ -69,6 +88,6 @@ public void keyPressed() {
   } else if (keyCode == 82) {
     mode = "red";
   } else if (keyCode == 66) {
-    mode = "blue"; 
+    mode = "blue";
   }
 }

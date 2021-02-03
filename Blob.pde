@@ -1,4 +1,4 @@
-public class Blob extends Entity {
+public abstract class Blob extends Entity {
   //fields
   private float ax, ay, vx, vy, speed, hp;
   //constructor
@@ -9,7 +9,7 @@ public class Blob extends Entity {
   }
   //methods
   public void move() {
-    hp -= 0.2;
+    hp -= 0.05;
     
     if (hp <= 0.0) {
       super.setActive(false); 
@@ -45,5 +45,7 @@ public class Blob extends Entity {
   public void damage(int d) {
     hp -= d; 
   }
+  
+  public abstract Blob reproduce();
   
 }

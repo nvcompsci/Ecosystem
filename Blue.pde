@@ -19,4 +19,11 @@ public class Blue extends Blob {
       }
     }
   }
+  public Blob reproduce() {
+    Blob baby = null;
+    if (Math.random() < (0.05 / frameRate)) {
+       baby = new Blue(super.getX(), super.getY());
+    }
+    return baby;    
+  }
 }
