@@ -36,6 +36,14 @@ public class Blob extends Entity {
       eat(food);
     }
   }
+
   //getters and setters
+  public float getHp() {
+    return hp;
+  }
+  
+  public void damage(int d) {
+    hp -= d; 
+  }
   
 }
