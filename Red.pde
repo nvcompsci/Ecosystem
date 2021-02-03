@@ -5,7 +5,7 @@ public class Red extends Blob {
   
   public Blob reproduce() {
     Blob baby = null;
-    if (Math.random() < 0.5) {
+    if (Math.random() < (0.1 / frameRate)) {
        baby = new Red(super.getX(), super.getY());
     }
     return baby;    

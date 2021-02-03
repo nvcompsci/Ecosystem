@@ -11,7 +11,8 @@ public void setup() {
 public void draw() {
   background(200);
   
-  ArrayList<Blue> babies = new ArrayList();
+  ArrayList<Blue> blueBabies = new ArrayList();
+  ArrayList<Red> redBabies = new ArrayList();
   
   for (Blue blue : blues) {
     if (blue.isActive()) {
@@ -22,14 +23,25 @@ public void draw() {
       }
       Blue maybeBaby = (Blue) blue.reproduce();
       if (maybeBaby != null) {
-        babies.add(maybeBaby);
+        blueBabies.add(maybeBaby);
         blobs.add(maybeBaby);
       }
     }
   }
   
-  for (Blue babyBlue : babies) {
-    if (babyBlue != null) blues.add(babyBlue);
+  for (Red red : reds) {
+    Red maybeBaby = (Red) red.reproduce();
+      if (maybeBaby != null) {
+        redBabies.add(maybeBaby);
+        blobs.add(maybeBaby);
+      }
+  }
+  
+  for (Blue baby : blueBabies) {
+    if (baby != null) blues.add(baby);
+  }
+  for (Red baby : redBabies) {
+    if (baby != null) reds.add(baby);
   }
   
   for (Blob blob : blobs) {
