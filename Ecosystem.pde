@@ -2,6 +2,8 @@ ArrayList<Blob> blobs = new ArrayList();
 ArrayList<Blue> blues = new ArrayList();
 ArrayList<Red> reds = new ArrayList();
 ArrayList<Food> foods = new ArrayList();
+//3.3 create ArrayList viruses
+
 String mode = "";
 
 public void setup() {
@@ -50,6 +52,7 @@ public void draw() {
     for (Food food : foods) {
       blob.blobVsFood(food);
     }
+    //3.7 check for collision between Blobs and Viruses
 
     blob.move();
     blob.draw();
@@ -59,6 +62,7 @@ public void draw() {
 
     food.draw();
   }
+  //3.5 draw the viruses
 
   takeOutTheTrash();
 }
@@ -92,6 +96,8 @@ public void mouseReleased() {
     Food newFood = new Food(mouseX, mouseY);
     foods.add(newFood);
   }
+  //3.4 spawn virus on mouseClick
+  
 }
 
 public void keyPressed() {
@@ -102,4 +108,5 @@ public void keyPressed() {
   } else if (keyCode == 66) {
     mode = "blue";
   }
+  //3.2 set mode to "virus" with keyCode
 }

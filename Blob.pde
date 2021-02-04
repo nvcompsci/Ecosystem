@@ -36,6 +36,8 @@ public abstract class Blob extends Entity {
       eat(food);
     }
   }
+  
+  //3.6 define blobVsVirus
 
   //getters and setters
   public float getHp() {
