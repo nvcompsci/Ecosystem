@@ -13,63 +13,59 @@ public void setup() {
 
 public void draw() {
   background(200);
-  
+
   ArrayList<Blue> blueBabies = new ArrayList();
   ArrayList<Red> redBabies = new ArrayList();
-  
+
   for (Blue blue : blues) {
-    if (blue.isActive()) {
-      for (Red red : reds) {
-        if (red.isActive()) { 
-          blue.fight(red);
-        }
-      }
-      Blue maybeBaby = (Blue) blue.reproduce();
-      if (maybeBaby != null) {
-        blueBabies.add(maybeBaby);
-        blobs.add(maybeBaby);
-      }
+    for (Red red : reds) { 
+      blue.fight(red);
+    }
+    Blue maybeBaby = (Blue) blue.reproduce();
+    if (maybeBaby != null) {
+      blueBabies.add(maybeBaby);
+      blobs.add(maybeBaby);
     }
   }
-  
+
   for (Red red : reds) {
     Red maybeBaby = (Red) red.reproduce();
-      if (maybeBaby != null) {
-        redBabies.add(maybeBaby);
-        blobs.add(maybeBaby);
-      }
+    if (maybeBaby != null) {
+      redBabies.add(maybeBaby);
+      blobs.add(maybeBaby);
+    }
   }
-  
+
   for (Blue baby : blueBabies) {
     if (baby != null) blues.add(baby);
   }
   for (Red baby : redBabies) {
     if (baby != null) reds.add(baby);
   }
-  
+
   for (Blob blob : blobs) {
-    if (!blob.isActive()) continue;
+    //if (!blob.isActive()) continue;
 
     for (Food food : foods) {
       blob.blobVsFood(food);
     }
     //3.7 check for collision between Blobs and Viruses
     for (Virus virus : viruses) {
-      blob.blobVsVirus(virus); 
+      blob.blobVsVirus(virus);
     }
     blob.move();
     blob.draw();
   }
   for (Food food : foods) {
-    if (!food.isActive()) continue;
+    //if (!food.isActive()) continue;
 
     food.draw();
   }
   //3.5 draw the viruses
 
   for (Virus virus : viruses) {
-    if (!virus.isActive()) continue;
-    
+    //if (!virus.isActive()) continue;
+
     virus.draw();
   }
   takeOutTheTrash();
@@ -77,16 +73,23 @@ public void draw() {
 
 private void takeOutTheTrash() {
   ArrayList<Blob> trash = new ArrayList();
-  for (Blob blob : blobs) {
-    if (!blob.isActive()) trash.add(blob);
+  for (Blue blue : blues) {
+    if (!blue.isActive()) trash.add(blue);
   }
-  blobs.remove(trash);
+  blobs.removeAll(trash);
+  blues.removeAll(trash);
+  trash.clear();
+  for (Red red : reds) {
+    if (!red.isActive()) trash.add(red);
+  }
+  blobs.removeAll(trash);
+  reds.removeAll(trash);
 
   ArrayList<Food> trashFood = new ArrayList();
   for (Food food : foods) {
     if (!food.isActive()) trashFood.add(food);
   }
-  foods.remove(trashFood);
+  foods.removeAll(trashFood);
 }
 
 //1. Spawn Reds and Blues, not Blobs
@@ -103,7 +106,7 @@ public void mouseReleased() {
   } else if (mode.equals("food")) {
     Food newFood = new Food(mouseX, mouseY);
     foods.add(newFood);
-  //3.4 spawn virus on mouseClick
+    //3.4 spawn virus on mouseClick
   } else if (mode.equals("virus")) {
     viruses.add( new Virus(mouseX, mouseY) );
   }
@@ -120,5 +123,4 @@ public void keyPressed() {
   } else if (keyCode == 86) {
     mode = "virus";
   }
-  
 }
