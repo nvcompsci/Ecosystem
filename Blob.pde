@@ -36,7 +36,19 @@ public abstract class Blob extends Entity {
       eat(food);
     }
   }
-
+  
+  private void becomesInfected() {
+    hp -= 20;
+  }
+  
+  //3.6 define blobVsVirus
+  public void blobVsVirus(Virus virus) {
+    if (dist(super.getX(),super.getY(),virus.getX(),virus.getY()) < (super.getSize() + virus.getSize())/2.0) {
+      System.out.println("infected");
+      becomesInfected();
+    }
+  }
+  
   //getters and setters
   public float getHp() {
     return hp;
